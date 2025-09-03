@@ -22,7 +22,7 @@ jobs:
       - name: Autenticarse en GCP
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: "$"
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
       - name: Inicializar Terraform
         run: terraform init
@@ -39,4 +39,4 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Debug evento
-        run: echo "event=$ ref=$ ref_name=$"
+        run: echo "event=${{ github.event_name }} ref=${{ github.ref }} ref_name=${{ github.ref_name }}"
